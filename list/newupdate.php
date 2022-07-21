@@ -8,20 +8,25 @@ include 'connection.php';
  $name= $row['name'];
  $email= $row['email'];
  $mobile= $row['mobile'];
+ $data= $row['checkboxdata'];
  $password= $row['password'];
+
 
 if(isset($_POST['submit'])){
     $name= $_POST['name'];
     $email= $_POST['email'];
     $mobile= $_POST['mobile'];
     $password= $_POST['password'];
+    $data= $_POST['data'];
+    $alldata=implode(",",$data);
+    
 
     $query= "UPDATE `crud` set id=$id,name='$name',email='$email',mobile='$mobile',
-    password='$password' where id=$id";
+    checkboxdata='$alldata',password='$password' where id=$id";
     $result=mysqli_query($connection,$query);
      if($result){
-        //header('location:display.php');
-        echo "upated successfully";
+        header('location:index.php');
+        echo "updated successfully";
      }
      else{
         die(mysql_error($connection));
@@ -55,6 +60,12 @@ if(isset($_POST['submit'])){
   <div class="mb-3">
     <label  class="form-label">password</label>
     <input type="password" class="form-control"  placeholder="Enter your password"  name="password" value=<?php echo $password?>  required > 
+  </div>
+  <div>
+  <input class="form-check-input mt-0" type="checkbox" name="data[]" value="Javascript" >Javascript
+  <input class="form-check-input mt-0" type="checkbox" name="data[]" value="html" >html  
+  <input class="form-check-input mt-0" type="checkbox" name="data[]"  value="python">python
+  <input class="form-check-input mt-0" type="checkbox" name="data[]"  value="php">php
   </div>
   <button type="submit" class="btn btn-primary" name="submit">update</button>
 </form>
