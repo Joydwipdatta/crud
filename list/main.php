@@ -5,7 +5,7 @@ if(isset($_POST['submit'])){
     $email=$_POST['email'];
     $mobile=$_POST['mobile'];
     $password=$_POST['password'];
-    $data=$_POST['checkboxdata'];
+    $data=$_POST['data'];
     $alldata=implode(",",$data);
 
     $query= "INSERT INTO crud (name,email,mobile,password,checkboxdata)
